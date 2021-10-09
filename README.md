@@ -2,7 +2,7 @@
 
 This is a Turing Machine Simulator made using Haskell, a purely functional programming language.
 
-### How to use and load: 
+### How to use: 
 Load the program into a Haskell interpreter. \
 I am using GHCi. \
  ``` 
@@ -19,7 +19,7 @@ main
 2. Specify the *DSM file* that contains the *dfn*,*sfn* and *mfn* tables, in our case will be the file 
 [*DSM_add_1_binary.txt*](https://github.com/SimonDahdal/Turing-Machine-Simulator-in-Haskell/blob/main/DSM_add_1_binary.txt)
 
-***> "write the DSM File location:"***
+ ***> "write the DSM File location:"***
 
 ```haskell 
 DSM_add_1_binary.txt
@@ -37,5 +37,42 @@ DSM_add_1_binary.txt
 "The output is :"
 "0 1 1 x"
 ```
-We can observe the the output tape is **011** the ***Binary*** equivalent to the number **3** in the **Decimal** system.
+We can observe that the output tape is **011** the ***Binary*** equivalent to the number **3** in the **Decimal** system.
 
+## DMS File Structure
+
+The file should have the same structure as follow:
+
+* **Initial State** : ```Integer```
+* **Halt State** : ```Integer```
+* **Special Symbol** : ```String```
+* **Direction Function *DFN*** : ```[(Integer, [([Char], Direction)])]```
+    * *R : Right*
+    * *L : Left*
+    * *N : None* 
+* **State Function *SFN*** : ```[(Integer, [([Char], Integer)])] ```
+* **Machine Function *MFN*** : ```[(Integer, [([Char], [Char])])]```
+
+
+```
+1
+
+3
+
+"x"
+
+[   (1, [("0",R),("1",R),("x",L)]),
+    (2, [("0",L),("1",L),("x",L)]),
+    (3, [("0",L),("1",L),("x",N)])
+]
+
+[  (1, [("0",1),("1",1),("x",2)]),
+   (2, [("0",3),("1",2),("x",3)]),
+   (3, [("0",3),("1",3),("x",3)]) 
+]
+
+[   (1, [("0","0"),("1","1"),("x","x")]),
+    (2, [("0","1"),("1","0"),("x","1")]),
+    (3, [("0","0"),("1","1"),("x","x")])
+]
+```
